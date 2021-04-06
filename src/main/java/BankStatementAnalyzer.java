@@ -33,7 +33,7 @@ public class BankStatementAnalyzer {
         List<BankTransaction> expensiveTransactions = processor
                 .findTransactions(bankTransaction -> {
                     boolean isFeb = bankTransaction.getDate().getMonth().equals(Month.FEBRUARY);
-                    boolean isExpensive = bankTransaction.getAmount() >= 1000;
+                    boolean isExpensive = bankTransaction.getAmount().getValue() >= 1000;
                     return isFeb && isExpensive;
                 });
 
@@ -44,13 +44,13 @@ public class BankStatementAnalyzer {
                 .stream()
                 .filter(bankTransaction -> {
                     boolean isFeb = bankTransaction.getDate().getMonth().equals(Month.FEBRUARY);
-                    boolean isExpensive = bankTransaction.getAmount() >= 1000;
+                    boolean isExpensive = bankTransaction.getAmount().getValue() >= 1000;
                     return isFeb && isExpensive;
                 })
                 .collect(Collectors.toList());
 
         List<BankTransaction> cheapTransactions = processor.findTransactions(transaction -> {
-            return transaction.getAmount() < 500;
+            return transaction.getAmount().getValue() < 500;
         });
 
         return collectSummary(processor);

@@ -1,12 +1,14 @@
+import domain.Amount;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class BankTransaction {
     private final LocalDate date;
-    private final double amount;
+    private final Amount amount;
     private final String description;
 
-    public BankTransaction(LocalDate date, double amount, String description) {
+    public BankTransaction(LocalDate date, Amount amount, String description) {
         this.date = date;
         this.amount = amount;
         this.description = description;
@@ -17,7 +19,7 @@ public class BankTransaction {
         return date;
     }
 
-    public double getAmount() {
+    public Amount getAmount() {
         return amount;
     }
 
@@ -40,7 +42,7 @@ public class BankTransaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BankTransaction that = (BankTransaction) o;
-        return Double.compare(that.amount, amount) == 0 && Objects.equals(date, that.date) && Objects.equals(description, that.description);
+        return Objects.equals(that.amount, amount) && Objects.equals(date, that.date) && Objects.equals(description, that.description);
     }
 
     @Override

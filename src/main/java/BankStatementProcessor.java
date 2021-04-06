@@ -10,13 +10,13 @@ public class BankStatementProcessor {
     }
 
     public double calculateTotal() {
-        return summarizeTransactions((accumulator, transaction) -> accumulator + transaction.getAmount());
+        return summarizeTransactions((accumulator, transaction) -> accumulator + transaction.getAmount().getValue());
     }
 
     public double calculateTotalForMonth(Month month) {
         return summarizeTransactions((accumulator, transaction) -> {
             if (transaction.getDate().getMonth() == month) {
-                return accumulator + transaction.getAmount();
+                return accumulator + transaction.getAmount().getValue();
             } else {
                 return accumulator;
             }
@@ -26,7 +26,7 @@ public class BankStatementProcessor {
     public double calculateForCategory(String category) {
         return summarizeTransactions((accumulator, transaction) -> {
             boolean isSameDescription = transaction.getDescription().equals(category);
-            double transactionAmount = transaction.getAmount();
+            double transactionAmount = transaction.getAmount().getValue();
             return isSameDescription ? transactionAmount + accumulator : accumulator;
         });
     }

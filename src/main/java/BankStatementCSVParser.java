@@ -1,3 +1,5 @@
+import domain.Amount;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,7 +12,8 @@ public class BankStatementCSVParser implements BankStatementParser {
         String[] columns = line.split(",");
 
         LocalDate date = LocalDate.parse(columns[0], DATE_PATTERN);
-        double amount = Double.parseDouble(columns[1]);
+        double unsafeAmount = Double.parseDouble(columns[1]);
+        Amount amount = new Amount(unsafeAmount);
         String description = columns[2];
 
         return new BankTransaction(date, amount, description);

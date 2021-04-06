@@ -4,6 +4,6 @@ public class BankTransactionIsFebruaryAndExpensive implements BankTransactionFil
 
     @Override
     public boolean test(BankTransaction transaction) {
-        return transaction.getDate().getMonth().equals(Month.FEBRUARY) && transaction.getAmount() >= 1000;
+        return transaction.getDate().getMonth().equals(Month.FEBRUARY) && transaction.getAmount().getValue() >= 1000;
     }
 }
